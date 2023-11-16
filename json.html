@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JSON CALC</title>
+</head>
+<body>
+
+<h1>THIS IS JSON CALCULATING</h1>
+<p id="max">Max of Average Annual Count:</p>
+<p id="min">Max of Average Annual Count:</p>
+<p id="ave">Ave of Average Annual Count:</p>
+<p id="sum">Sum of Average Annual Count:</p>
+</body>
+<script>
+  const json_data = `[
+            {
+                "State_Descriptor": "Incidence Rate Report for South Carolina by County",
+                "Cancer_Descriptor": "Breast (All Stages^), 2016-2020",
+                "Data_Descriptor": "All Races (includes Hispanic), Female, All Ages",
+                "County_Data": [
+                    {
+                      "County": "South Carolina(6)",
+                      "FIPS": "45000",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "128.6",
+                      "Lower 95% Confidence Interval": "0.3",
+                      "Upper 95% Confidence Interval": "0.7",
+                      "CI*Rank([rank note])": "N/A",
+                      "Lower CI (CI*Rank)": "20",
+                      "Upper CI (CI*Rank)": "34",
+                      "Average Annual Count": "4343",
+                      "Recent Trend": "rising",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.5"
+                  },
+                  {
+                      "County": "US (SEER+NPCR)(1)",
+                      "FIPS": "00000",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "127",
+                      "Lower 95% Confidence Interval": "0.3",
+                      "Upper 95% Confidence Interval": "0.7",
+                      "CI*Rank([rank note])": "N/A",
+                      "Lower CI (CI*Rank)": "N/A",
+                      "Upper CI (CI*Rank)": "N/A",
+                      "Average Annual Count": "249750",
+                      "Recent Trend": "rising",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.5"
+                  },
+                  {
+                      "County": "Union County(6)",
+                      "FIPS": "45087",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "152.4",
+                      "Lower 95% Confidence Interval": "1.5",
+                      "Upper 95% Confidence Interval": "6.5",
+                      "CI*Rank([rank note])": "1",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "37",
+                      "Average Annual Count": "30",
+                      "Recent Trend": "rising",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "3.8"
+                  },
+                  {
+                      "County": "Richland County(6)",
+                      "FIPS": "45079",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "147.3",
+                      "Lower 95% Confidence Interval": "-0.2",
+                      "Upper 95% Confidence Interval": "0.8",
+                      "CI*Rank([rank note])": "2",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "13",
+                      "Average Annual Count": "337",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.3"
+                  },
+                  {
+                      "County": "Clarendon County(6)",
+                      "FIPS": "45027",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "147.1",
+                      "Lower 95% Confidence Interval": "1.9",
+                      "Upper 95% Confidence Interval": "22.5",
+                      "CI*Rank([rank note])": "3",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "36",
+                      "Average Annual Count": "41",
+                      "Recent Trend": "rising",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "13.7"
+                  },
+                  {
+                      "County": "Georgetown County(6)",
+                      "FIPS": "45043",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "141",
+                      "Lower 95% Confidence Interval": "-4.3",
+                      "Upper 95% Confidence Interval": "1.7",
+                      "CI*Rank([rank note])": "4",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "34",
+                      "Average Annual Count": "77",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.4"
+                  },
+                  {
+                      "County": "Newberry County(6)",
+                      "FIPS": "45071",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "140.3",
+                      "Lower 95% Confidence Interval": "-2.3",
+                      "Upper 95% Confidence Interval": "1.7",
+                      "CI*Rank([rank note])": "5",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "41",
+                      "Average Annual Count": "37",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "-0.4"
+                  },
+                  {
+                      "County": "York County(6)",
+                      "FIPS": "45091",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "140.3",
+                      "Lower 95% Confidence Interval": "0.1",
+                      "Upper 95% Confidence Interval": "2.2",
+                      "CI*Rank([rank note])": "6",
+                      "Lower CI (CI*Rank)": "2",
+                      "Upper CI (CI*Rank)": "22",
+                      "Average Annual Count": "234",
+                      "Recent Trend": "rising",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "1.0"
+                  },
+                  {
+                      "County": "McCormick County(6)",
+                      "FIPS": "45065",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "140.2",
+                      "Lower 95% Confidence Interval": "-0.2",
+                      "Upper 95% Confidence Interval": "6.0",
+                      "CI*Rank([rank note])": "7",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "11",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "2.8"
+                  },
+                  {
+                      "County": "Chester County(6)",
+                      "FIPS": "45023",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "138.8",
+                      "Lower 95% Confidence Interval": "0.3",
+                      "Upper 95% Confidence Interval": "4.2",
+                      "CI*Rank([rank note])": "8",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "43",
+                      "Average Annual Count": "32",
+                      "Recent Trend": "rising",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "2.1"
+                  },
+                  {
+                      "County": "Charleston County(6)",
+                      "FIPS": "45019",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "136.9",
+                      "Lower 95% Confidence Interval": "-0.1",
+                      "Upper 95% Confidence Interval": "6.1",
+                      "CI*Rank([rank note])": "9",
+                      "Lower CI (CI*Rank)": "3",
+                      "Upper CI (CI*Rank)": "24",
+                      "Average Annual Count": "354",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "3.5"
+                  },
+                  {
+                      "County": "Williamsburg County(6)",
+                      "FIPS": "45089",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "136.2",
+                      "Lower 95% Confidence Interval": "-1.9",
+                      "Upper 95% Confidence Interval": "3.4",
+                      "CI*Rank([rank note])": "10",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "43",
+                      "Average Annual Count": "32",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.7"
+                  },
+                  {
+                      "County": "Calhoun County(6)",
+                      "FIPS": "45017",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "135.3",
+                      "Lower 95% Confidence Interval": "-2.8",
+                      "Upper 95% Confidence Interval": "6.8",
+                      "CI*Rank([rank note])": "11",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "15",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "1.7"
+                  },
+                  {
+                      "County": "Pickens County(6)",
+                      "FIPS": "45077",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "134.8",
+                      "Lower 95% Confidence Interval": "0.7",
+                      "Upper 95% Confidence Interval": "2.0",
+                      "CI*Rank([rank note])": "12",
+                      "Lower CI (CI*Rank)": "2",
+                      "Upper CI (CI*Rank)": "35",
+                      "Average Annual Count": "101",
+                      "Recent Trend": "rising",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "1.3"
+                  },
+                  {
+                      "County": "Saluda County(6)",
+                      "FIPS": "45081",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "134.6",
+                      "Lower 95% Confidence Interval": "-2.6",
+                      "Upper 95% Confidence Interval": "3.8",
+                      "CI*Rank([rank note])": "13",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "17",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.5"
+                  },
+                  {
+                      "County": "Florence County(6)",
+                      "FIPS": "45041",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "134.3",
+                      "Lower 95% Confidence Interval": "-0.1",
+                      "Upper 95% Confidence Interval": "2.3",
+                      "CI*Rank([rank note])": "14",
+                      "Lower CI (CI*Rank)": "2",
+                      "Upper CI (CI*Rank)": "33",
+                      "Average Annual Count": "126",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "1.0"
+                  },
+                  {
+                      "County": "Chesterfield County(6)",
+                      "FIPS": "45025",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "133.6",
+                      "Lower 95% Confidence Interval": "0.7",
+                      "Upper 95% Confidence Interval": "3.3",
+                      "CI*Rank([rank note])": "15",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "43",
+                      "Average Annual Count": "41",
+                      "Recent Trend": "rising",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "1.9"
+                  },
+                  {
+                      "County": "Edgefield County(6)",
+                      "FIPS": "45037",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "133.1",
+                      "Lower 95% Confidence Interval": "-4.4",
+                      "Upper 95% Confidence Interval": "1.7",
+                      "CI*Rank([rank note])": "16",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "45",
+                      "Average Annual Count": "24",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "-1.5"
+                  },
+                  {
+                      "County": "Greenville County(6)",
+                      "FIPS": "45045",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "132.6",
+                      "Lower 95% Confidence Interval": "-1.3",
+                      "Upper 95% Confidence Interval": "3.6",
+                      "CI*Rank([rank note])": "17",
+                      "Lower CI (CI*Rank)": "6",
+                      "Upper CI (CI*Rank)": "28",
+                      "Average Annual Count": "427",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.9"
+                  },
+                  {
+                      "County": "Lexington County(6)",
+                      "FIPS": "45063",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "131.8",
+                      "Lower 95% Confidence Interval": "-0.6",
+                      "Upper 95% Confidence Interval": "0.9",
+                      "CI*Rank([rank note])": "18",
+                      "Lower CI (CI*Rank)": "5",
+                      "Upper CI (CI*Rank)": "32",
+                      "Average Annual Count": "246",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.1"
+                  },
+                  {
+                      "County": "Hampton County(6)",
+                      "FIPS": "45049",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "130.5",
+                      "Lower 95% Confidence Interval": "-1.9",
+                      "Upper 95% Confidence Interval": "5.7",
+                      "CI*Rank([rank note])": "19",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "16",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "1.7"
+                  },
+                  {
+                      "County": "Lancaster County(6)",
+                      "FIPS": "45057",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "128.9",
+                      "Lower 95% Confidence Interval": "1.8",
+                      "Upper 95% Confidence Interval": "5.0",
+                      "CI*Rank([rank note])": "20",
+                      "Lower CI (CI*Rank)": "3",
+                      "Upper CI (CI*Rank)": "41",
+                      "Average Annual Count": "92",
+                      "Recent Trend": "rising",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "3.2"
+                  },
+                  {
+                      "County": "Anderson County(6)",
+                      "FIPS": "45007",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "127.3",
+                      "Lower 95% Confidence Interval": "-0.7",
+                      "Upper 95% Confidence Interval": "1.4",
+                      "CI*Rank([rank note])": "21",
+                      "Lower CI (CI*Rank)": "7",
+                      "Upper CI (CI*Rank)": "38",
+                      "Average Annual Count": "173",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.3"
+                  },
+                  {
+                      "County": "Dorchester County(6)",
+                      "FIPS": "45035",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "126.9",
+                      "Lower 95% Confidence Interval": "-6.3",
+                      "Upper 95% Confidence Interval": "-0.1",
+                      "CI*Rank([rank note])": "22",
+                      "Lower CI (CI*Rank)": "6",
+                      "Upper CI (CI*Rank)": "40",
+                      "Average Annual Count": "121",
+                      "Recent Trend": "falling",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "-1.8"
+                  },
+                  {
+                      "County": "Spartanburg County(6)",
+                      "FIPS": "45083",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "126.7",
+                      "Lower 95% Confidence Interval": "-0.6",
+                      "Upper 95% Confidence Interval": "1.0",
+                      "CI*Rank([rank note])": "23",
+                      "Lower CI (CI*Rank)": "9",
+                      "Upper CI (CI*Rank)": "37",
+                      "Average Annual Count": "253",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.2"
+                  },
+                  {
+                      "County": "Oconee County(6)",
+                      "FIPS": "45073",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "126.1",
+                      "Lower 95% Confidence Interval": "-0.7",
+                      "Upper 95% Confidence Interval": "1.4",
+                      "CI*Rank([rank note])": "24",
+                      "Lower CI (CI*Rank)": "3",
+                      "Upper CI (CI*Rank)": "43",
+                      "Average Annual Count": "76",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.3"
+                  },
+                  {
+                      "County": "Dillon County(6)",
+                      "FIPS": "45033",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "125.6",
+                      "Lower 95% Confidence Interval": "-1.5",
+                      "Upper 95% Confidence Interval": "2.9",
+                      "CI*Rank([rank note])": "25",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "25",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.6"
+                  },
+                  {
+                      "County": "Cherokee County(6)",
+                      "FIPS": "45021",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "125",
+                      "Lower 95% Confidence Interval": "-0.9",
+                      "Upper 95% Confidence Interval": "2.7",
+                      "CI*Rank([rank note])": "26",
+                      "Lower CI (CI*Rank)": "3",
+                      "Upper CI (CI*Rank)": "45",
+                      "Average Annual Count": "45",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.8"
+                  },
+                  {
+                      "County": "Marlboro County(6)",
+                      "FIPS": "45069",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "122.7",
+                      "Lower 95% Confidence Interval": "-2.8",
+                      "Upper 95% Confidence Interval": "3.1",
+                      "CI*Rank([rank note])": "27",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "22",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.1"
+                  },
+                  {
+                      "County": "Greenwood County(6)",
+                      "FIPS": "45047",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "122.5",
+                      "Lower 95% Confidence Interval": "-2.4",
+                      "Upper 95% Confidence Interval": "0.6",
+                      "CI*Rank([rank note])": "28",
+                      "Lower CI (CI*Rank)": "5",
+                      "Upper CI (CI*Rank)": "44",
+                      "Average Annual Count": "60",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "-0.9"
+                  },
+                  {
+                      "County": "Beaufort County(6)",
+                      "FIPS": "45013",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "122.1",
+                      "Lower 95% Confidence Interval": "-9.2",
+                      "Upper 95% Confidence Interval": "-3.2",
+                      "CI*Rank([rank note])": "29",
+                      "Lower CI (CI*Rank)": "12",
+                      "Upper CI (CI*Rank)": "42",
+                      "Average Annual Count": "188",
+                      "Recent Trend": "falling",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "-6.1"
+                  },
+                  {
+                      "County": "Bamberg County(6)",
+                      "FIPS": "45009",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "122",
+                      "Lower 95% Confidence Interval": "-1.7",
+                      "Upper 95% Confidence Interval": "1.9",
+                      "CI*Rank([rank note])": "30",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "14",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.1"
+                  },
+                  {
+                      "County": "Lee County(6)",
+                      "FIPS": "45061",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "120.6",
+                      "Lower 95% Confidence Interval": "-1.5",
+                      "Upper 95% Confidence Interval": "4.0",
+                      "CI*Rank([rank note])": "31",
+                      "Lower CI (CI*Rank)": "1",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "14",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "1.1"
+                  },
+                  {
+                      "County": "Orangeburg County(6)",
+                      "FIPS": "45075",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "120.4",
+                      "Lower 95% Confidence Interval": "-0.3",
+                      "Upper 95% Confidence Interval": "1.8",
+                      "CI*Rank([rank note])": "32",
+                      "Lower CI (CI*Rank)": "8",
+                      "Upper CI (CI*Rank)": "45",
+                      "Average Annual Count": "76",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.7"
+                  },
+                  {
+                      "County": "Berkeley County(6)",
+                      "FIPS": "45015",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "120.1",
+                      "Lower 95% Confidence Interval": "-0.4",
+                      "Upper 95% Confidence Interval": "1.9",
+                      "CI*Rank([rank note])": "33",
+                      "Lower CI (CI*Rank)": "14",
+                      "Upper CI (CI*Rank)": "43",
+                      "Average Annual Count": "154",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.6"
+                  },
+                  {
+                      "County": "Kershaw County(6)",
+                      "FIPS": "45055",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "119.7",
+                      "Lower 95% Confidence Interval": "-0.9",
+                      "Upper 95% Confidence Interval": "2.5",
+                      "CI*Rank([rank note])": "34",
+                      "Lower CI (CI*Rank)": "6",
+                      "Upper CI (CI*Rank)": "45",
+                      "Average Annual Count": "55",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.7"
+                  },
+                  {
+                      "County": "Fairfield County(6)",
+                      "FIPS": "45039",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "119.5",
+                      "Lower 95% Confidence Interval": "-2.6",
+                      "Upper 95% Confidence Interval": "1.8",
+                      "CI*Rank([rank note])": "35",
+                      "Lower CI (CI*Rank)": "2",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "23",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "-0.4"
+                  },
+                  {
+                      "County": "Marion County(6)",
+                      "FIPS": "45067",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "117.7",
+                      "Lower 95% Confidence Interval": "-2.2",
+                      "Upper 95% Confidence Interval": "2.8",
+                      "CI*Rank([rank note])": "36",
+                      "Lower CI (CI*Rank)": "3",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "27",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.2"
+                  },
+                  {
+                      "County": "Jasper County(6)",
+                      "FIPS": "45053",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "117.6",
+                      "Lower 95% Confidence Interval": "0.8",
+                      "Upper 95% Confidence Interval": "5.3",
+                      "CI*Rank([rank note])": "37",
+                      "Lower CI (CI*Rank)": "2",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "25",
+                      "Recent Trend": "rising",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "2.7"
+                  },
+                  {
+                      "County": "Sumter County(6)",
+                      "FIPS": "45085",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "116.8",
+                      "Lower 95% Confidence Interval": "-9.1",
+                      "Upper 95% Confidence Interval": "0.5",
+                      "CI*Rank([rank note])": "38",
+                      "Lower CI (CI*Rank)": "13",
+                      "Upper CI (CI*Rank)": "45",
+                      "Average Annual Count": "78",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "-1.1"
+                  },
+                  {
+                      "County": "Laurens County(6)",
+                      "FIPS": "45059",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "116.3",
+                      "Lower 95% Confidence Interval": "-1.2",
+                      "Upper 95% Confidence Interval": "1.4",
+                      "CI*Rank([rank note])": "39",
+                      "Lower CI (CI*Rank)": "9",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "55",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.1"
+                  },
+                  {
+                      "County": "Colleton County(6)",
+                      "FIPS": "45029",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "115.2",
+                      "Lower 95% Confidence Interval": "-1.9",
+                      "Upper 95% Confidence Interval": "3.5",
+                      "CI*Rank([rank note])": "40",
+                      "Lower CI (CI*Rank)": "5",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "32",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.7"
+                  },
+                  {
+                      "County": "Horry County(6)",
+                      "FIPS": "45051",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "114.3",
+                      "Lower 95% Confidence Interval": "-0.6",
+                      "Upper 95% Confidence Interval": "1.3",
+                      "CI*Rank([rank note])": "41",
+                      "Lower CI (CI*Rank)": "24",
+                      "Upper CI (CI*Rank)": "44",
+                      "Average Annual Count": "308",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.2"
+                  },
+                  {
+                      "County": "Aiken County(6)",
+                      "FIPS": "45003",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "110.2",
+                      "Lower 95% Confidence Interval": "-1.4",
+                      "Upper 95% Confidence Interval": "1.1",
+                      "CI*Rank([rank note])": "42",
+                      "Lower CI (CI*Rank)": "26",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "135",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "-0.2"
+                  },
+                  {
+                      "County": "Barnwell County(6)",
+                      "FIPS": "45011",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "107.1",
+                      "Lower 95% Confidence Interval": "-3.2",
+                      "Upper 95% Confidence Interval": "3.3",
+                      "CI*Rank([rank note])": "43",
+                      "Lower CI (CI*Rank)": "5",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "17",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "-0.1"
+                  },
+                  {
+                      "County": "Darlington County(6)",
+                      "FIPS": "45031",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "106.3",
+                      "Lower 95% Confidence Interval": "-0.5",
+                      "Upper 95% Confidence Interval": "2.4",
+                      "CI*Rank([rank note])": "44",
+                      "Lower CI (CI*Rank)": "20",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "51",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "0.9"
+                  },
+                  {
+                      "County": "Abbeville County(6)",
+                      "FIPS": "45001",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "99.6",
+                      "Lower 95% Confidence Interval": "-9.8",
+                      "Upper 95% Confidence Interval": "-0.7",
+                      "CI*Rank([rank note])": "45",
+                      "Lower CI (CI*Rank)": "11",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "18",
+                      "Recent Trend": "falling",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "-3.7"
+                  },
+                  {
+                      "County": "Allendale County(6)",
+                      "FIPS": "45005",
+                      "Age-Adjusted Incidence Rate([rate note]) - cases per 100,000": "89",
+                      "Lower 95% Confidence Interval": "-7.6",
+                      "Upper 95% Confidence Interval": "0.9",
+                      "CI*Rank([rank note])": "46",
+                      "Lower CI (CI*Rank)": "5",
+                      "Upper CI (CI*Rank)": "46",
+                      "Average Annual Count": "6",
+                      "Recent Trend": "stable",
+                      "Recent 5-Year Trend ([trend note]) in Incidence Rates": "-3.2"
+                  }
+                ]
+            }
+        ]`;
+
+        function renameKey ( obj, oldKey, newKey ) {
+            obj[newKey] = obj[oldKey];
+            delete obj[oldKey];
+        }
+
+        const values = [];
+        let collection = JSON.parse(json_data);
+        collection.forEach(function (value) {
+            value.County_Data.forEach( obj => renameKey( obj, "Average Annual Count", "average_annual_count" ) );
+            value.County_Data.every(e => values.push(parseFloat(e.average_annual_count)?parseFloat(e.average_annual_count):0));
+        });
+
+
+        const max = Math.max.apply(null, values);
+        const min = Math.min.apply(null, values);
+        const ave = (values.reduce((a, b) => a + b) / values.length).toFixed(2);
+        const sum_value = (values.reduce((a, b) => a + b));
+
+        console.log('Max of Average Annual Count: ' + max);
+        console.log('Min of Average Annual Count: ' + min);
+        console.log('Average of Average Annual Count: ' + ave);
+        console.log('Sum of Average Annual Count: ' + sum_value);
+
+        document.getElementById("max").innerHTML= 'Max of Average Annual Count: ' + max;
+        document.getElementById("min").innerHTML= 'Min of Average Annual Count: ' + min;
+        document.getElementById("ave").innerHTML= 'Average of Average Annual Count: ' + ave;
+        document.getElementById("sum").innerHTML= 'Sum of Average Annual Count: ' + sum_value;
+
+     
+</script>
+</html>

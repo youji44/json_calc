@@ -1,0 +1,17 @@
+I have a JSON file that I need some JavaScript Math functions applied.  I need MIN, MAX, AVERAGE and Number of objects (COUNT).  Just some code that I can put into a function  Something like
+
+https://stackoverflow.com/questions/53648919/get-min-and-max-of-nested-json-object
+
+I can Google but I don't have time.
+
+====================
+
+I am creating a heatmap GIS project and this will create the data for the code
+
+I will take the MIN and the MAX and divide it into 5 sections to determine the color to apply to the fillcolor of a leaflet.js project
+
+ Just code 
+ actually make just a line of code for each- 
+
+ like var min = Math.min(...data.map(e => e.room.price))
+console.log(min)
