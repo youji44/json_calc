@@ -654,8 +654,11 @@
         const values = [];
         let collection = JSON.parse(json_data);
         collection.forEach(function (value) {
-            value.County_Data.forEach( obj => renameKey( obj, "Average Annual Count", "average_annual_count" ) );
-            value.County_Data.every(e => values.push(parseFloat(e.average_annual_count)?parseFloat(e.average_annual_count):0));
+            value.County_Data.forEach( function(obj){
+              renameKey(obj, "Average Annual Count", "average_annual_count" );
+              if(obj["FIPS"].slice(-3) != "000")
+                values.push(parseFloat(obj["average_annual_count"])?parseFloat(obj["average_annual_count"]):0);
+          });
         });
 
 
